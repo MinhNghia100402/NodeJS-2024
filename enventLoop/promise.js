@@ -2,6 +2,8 @@
 // nhưng sẽ được xử lí và có giá trị vào một thời gia nào đó trong tương lai
 // Promise API
 
+const { log } = require("console");
+
 // create promise  
 // if (window.Promise) // check browser support promise
 // {
@@ -49,3 +51,40 @@ async function test ()
         });
 }
 test();
+
+
+// async function :    // từ khóa Async  đặt trước 1 hàm làm cho hàm trả về promise 
+// await kiểm soát quá trình xử lí sự kiện, khi sự kiện được xử lí xong thì mới cho phép xử lí sự kiện khác 
+
+// từ khóa await đặt trước 1 hàm làm cho hàm chờ  promise 
+// let value = await promises;
+// await chỉ có thể sử dụng bên trong một hàm không đồng bộ 
+
+async function demo()
+{
+    await setTimeout(() => {
+        console.log('line1');
+    }, 2000);
+    await setTimeout(() => {
+        console.log('line2');
+},1000);
+}
+
+demo();
+
+
+async function fc ()
+{
+    let promise  = new Promise((resolve, reject) =>{        // khởi tạo 1 promise 
+        setTimeout(() => {
+            resolve('done !');
+        }, 2000);
+    })
+
+    // sử dụng await 
+    let result = await promise;
+    console.log(result);
+
+}
+
+fc();
