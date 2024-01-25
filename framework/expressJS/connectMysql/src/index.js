@@ -1,9 +1,12 @@
-var mysql = require('mysql');
+var mysql = require('mysql');var mysql = require('mysql');
 var conn = mysql.createConnection({
-    host: "127.0.0.1",
-    user: "DESKTOP-JFTMLV7/nghia",
-    password: "",
-    database: "QLNhanVien"
+    host: "localhost",
+    user: "nghialee",
+    password: "1",
+    database: "qlnv",
+    insecureAuth: true
   });
   
-module.exports = conn;
+module.exports = {
+  conn,
+};
