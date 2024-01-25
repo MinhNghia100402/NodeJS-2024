@@ -15,10 +15,31 @@ class EmployeesModels {
     };
 
     updateEmployee(updatedData, callback) {
-        const sql = `UPDATE Employees SET ${Object.keys(updatedData).map(key => `${key}=?`).join(', ')} WHERE employee_id=?`;
-        const values = [...Object.values(updatedData), employeeId];
+            const{employee_id, first_name,last_name,email, department_id} = updatedData;
+            const sql = `UPDATE Employees SET 
+                    first_name = ?,
+                    last_name = ?,
+                    email = ?,
+                    department_id = ?
+                WHERE employee_id = ?`;
 
-        this.connection.query(sql, values, (err, result) => {
+            const values = [first_name, last_name, email,department_id,employee_id];
+            this.connection.query(sql, values, (err, result) => {
+                callback(err, result);        
+        });
+    }
+
+    deleteEmployee(data, callback) {
+            const{employee_id,first_name} = data;
+            const sql = 'DELETE from Employees WHERE employee_id=?';
+            this.connection.query(sql, [employee_id], (err, result) => {
+                callback(err, result);
+            });
+    }
+    getOneEmployee(data, callback) {
+        const{employee_id} = data;
+        const sql = 'SELECT * FROM Employees WHERE employee_id=?';
+        this.connection.query(sql, [employee_id], (err, result) => {
             callback(err, result);
         });
     };
